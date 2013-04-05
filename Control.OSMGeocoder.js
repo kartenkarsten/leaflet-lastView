@@ -3,8 +3,9 @@ L.Control.OSMGeocoder = L.Control.extend({
 		collapsed: true,
 		position: 'topright',
 		text: 'Locate',
+		bounds: null, //Possible vals: null (no bounds), maxBounds, viewBounds, custom LatLngBounds object 
 		callback: function (results) {
-      console.log(results);
+			console.log(results);
 			var bbox = results[0].boundingbox,
 				first = new L.LatLng(bbox[0], bbox[2]),
 				second = new L.LatLng(bbox[1], bbox[3]),
@@ -66,13 +67,30 @@ L.Control.OSMGeocoder = L.Control.extend({
 		this._callbackId = "_l_osmgeocoder_" + (this._callbackId++);
 		window[this._callbackId] = L.Util.bind(this.options.callback, this);
 
+
+		/* Set up params to send to Nominatim */
 		var params = {
+			// Defaults
 			q: this._input.value,
 			json_callback : this._callbackId,
-      format: 'json'
-		},
-		url = " http://nominatim.openstreetmap.org/search" + L.Util.getParamString(params),
+			format: 'json'
+		};
+		
+		if (this.options.bounds && this.options.bounds != null) {
+		    if( this.options.bounds instanceof L.LatLngBounds ) {
+			params.viewbox = this.options.bounds.toBBoxString();
+			params.bounded = 1;
+		    }
+		    else {
+			console.log('bounds must be of type L.LatLngBounds');
+			return;
+		    }
+		}
+
+		var url = " http://nominatim.openstreetmap.org/search" + L.Util.getParamString(params),
 		script = document.createElement("script");
+
+
 
 
 		script.type = "text/javascript";
