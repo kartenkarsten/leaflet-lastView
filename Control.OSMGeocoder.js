@@ -3,7 +3,8 @@ L.Control.OSMGeocoder = L.Control.extend({
 		collapsed: true,
 		position: 'topright',
 		text: 'Locate',
-		bounds: null, //Possible vals: null (no bounds), maxBounds, viewBounds, custom LatLngBounds object 
+		bounds: null, // L.LatLngBounds
+		email: null, // String
 		callback: function (results) {
 			console.log(results);
 			var bbox = results[0].boundingbox,
@@ -84,6 +85,15 @@ L.Control.OSMGeocoder = L.Control.extend({
 		    else {
 			console.log('bounds must be of type L.LatLngBounds');
 			return;
+		    }
+		}
+
+		if (this.options.email && this.options.email != null) {
+		    if (typeof this.options.email == 'string') {
+			params.email = this.options.email;
+		    }
+		    else{
+			console.log('email must be a string');
 		    }
 		}
 
