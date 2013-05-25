@@ -34,3 +34,6 @@ var options = {
     }
 };
 ```
+
+# Credits
+A big thanks to Sa3m and his [Bing Geocoder](https://github.com/sa3m/leaflet-control-bing-geocoder) which is the base of this code.
