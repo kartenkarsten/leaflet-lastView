@@ -1,0 +1,27 @@
+{
+  "name": "leaflet-control-lastpos",
+  "version": "0.1.0",
+  "authors": [
+    "Karsten Hinz <k.hinz@tu-bs.de>"
+  ],
+  "description": "A leaflet control to continue at that position you left the map last time.",
+  "main": "L.LastView.js",
+  "keywords": [
+    "osm",
+    "openstreetmap",
+    "restore",
+    "leaflet",
+    "position"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "demo",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "leaflet": "~0.7.3"
+}
